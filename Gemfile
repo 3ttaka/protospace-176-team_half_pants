@@ -73,4 +73,12 @@ end
 
 group :development do
   gem 'rubocop', require: false
+<<<<<<< Updated upstream
 end
+=======
+end
+
+gem 'devise'
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
+>>>>>>> Stashed changes
