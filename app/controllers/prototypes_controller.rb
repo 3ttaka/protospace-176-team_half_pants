@@ -1,7 +1,9 @@
 class PrototypesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
+  before_action :move_to_root, only: :edit
+
   def index
     @prototypes = Prototype.all
-
   end
 
   def new
@@ -16,7 +18,6 @@ class PrototypesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
 
   def show
     @prototype = Prototype.find(params[:id])
@@ -41,10 +42,16 @@ class PrototypesController < ApplicationController
     redirect_to root_path
   end
 
+  def move_to_root
+    prototype = Prototype.find(params[:id])
+    unless current_user == prototype.user
+      redirect_to root_path
+    end
+  end
+
   private
+
   def prototype_params
     params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
   end
-
-
 end
