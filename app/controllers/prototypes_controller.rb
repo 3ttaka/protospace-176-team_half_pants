@@ -1,6 +1,7 @@
 class PrototypesController < ApplicationController
   def index
     @prototypes = Prototype.all
+
   end
 
   def new
@@ -15,6 +16,7 @@ class PrototypesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
 
   def show
     @prototype = Prototype.find(params[:id])
